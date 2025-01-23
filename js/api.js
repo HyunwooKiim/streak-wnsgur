@@ -1,9 +1,11 @@
 import CONFIG from "./config.js";
 
+const key = atob(CONFIG.API_KEY);
+
 export async function fetchStartDate() {
     try {
         const response = await fetch(CONFIG.API_URL, {
-            headers: { Authorization: `Bearer ${CONFIG.API_KEY}` },
+            headers: { Authorization: `Bearer ${key}` },
         });
         const data = await response.json();
         const content = JSON.parse(atob(data.content)); // Base64 디코딩
@@ -22,7 +24,7 @@ export async function updateStartDate(newDate, message) {
         await fetch(CONFIG.API_URL, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${CONFIG.API_KEY}`,
+                Authorization: `Bearer ${key}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
