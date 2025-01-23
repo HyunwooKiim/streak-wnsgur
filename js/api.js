@@ -2,8 +2,6 @@ import CONFIG from "./config.js";
 
 const key = `${CONFIG.part1}_${CONFIG.part2}${CONFIG.part3}${CONFIG.part4}`;
 
-console.log("API Key:", key);
-
 export async function fetchStartDate() {
     try {
         const response = await fetch(CONFIG.API_URL, {
