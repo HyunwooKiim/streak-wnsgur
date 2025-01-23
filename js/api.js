@@ -8,7 +8,7 @@ export async function fetchStartDate() {
             headers: { Authorization: `Bearer ${key}` },
         });
         const data = await response.json();
-        const content = JSON.parse(atob(data.content)); // Base64 디코딩
+        const content = JSON.parse(atob(data.content));
         return { startDate: content.startDate, sha: data.sha };
     } catch (error) {
         console.error("Error fetching start date:", error);
@@ -29,7 +29,7 @@ export async function updateStartDate(newDate, message) {
             },
             body: JSON.stringify({
                 message: message,
-                content: btoa(JSON.stringify(newContent, null, 2)), // Base64 인코딩
+                content: btoa(JSON.stringify(newContent, null, 2)),
                 sha: sha,
             }),
         });
