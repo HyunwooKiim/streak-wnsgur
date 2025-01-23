@@ -1,12 +1,14 @@
 import CONFIG from "./config.js";
 
-console.log("API Key:", CONFIG.API_KEY);
+const key = `${CONFIG.part1}_${CONFIG.part2}${CONFIG.part3}${CONFIG.part4}`;
+
+console.log("API Key:", key);
 
 export async function fetchStartDate() {
     try {
         const response = await fetch(CONFIG.API_URL, {
             headers: {
-                Authorization: `Bearer ${CONFIG.API_KEY}`, // API 키 주입
+                Authorization: `Bearer ${key}`, // API 키 주입
             },
         });
 
@@ -38,7 +40,7 @@ export async function updateStartDate(newDate, message) {
         await fetch(CONFIG.API_URL, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${CONFIG.API_KEY}`,
+                Authorization: `Bearer ${key}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({

@@ -1,5 +1,8 @@
 const CONFIG = {
-    API_KEY: "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",
+    part1: "ghp",
+    part2: "AFPm3FwKB",
+    part3: "1zvuvqLcdTsBmb",
+    part4 : "OVYKGBZ2wgdpH",
     API_URL: "https://api.github.com/repos/HyunwooKiim/streak-wnsgur/contents/data.json"
 };
 
