@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>황준혁의 금주 스트릭</title>
-    <link rel="stylesheet" href="style.css">
+    <title>streak-wngsur</title>
 </head>
 <body>
-    <h1>황준혁의 금주 스트릭</h1>
-    <div class="streak-container" id="streak">0</div>
-    <p class="message" id="message"></p>
-    <button onclick="updateStartDate()">초기화</button>
-    <script src="script.js"></script>
+    <h1>조회 비밀번호를 입력하세요!</h1>
+    <input type="password" id="password">
+    <button id="submit">확인</button>
 </body>
+<script>
+    const password = "wnsgur";
+    const submit = document.getElementById("submit");
+    const input = document.getElementById("password");
+    submit.addEventListener("click", () => {
+        if (input.value === password) {
+            window.location.href = "streak.html";
+        } else {
+            alert("비밀번호가 틀렸습니다!");
+        }
+    });
+</script>
 </html>

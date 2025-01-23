@@ -2,13 +2,13 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: black;
     text-align: center;
-    color: #333;
+    color: white;
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 44px;
     color: #fc472b;
     margin-top: 20px;
 }
@@ -23,18 +23,21 @@ h1 {
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 3em;
+    font-size: 40px;
     font-weight: bold;
 }
 
 .message {
-    font-size: 1.2em;
-    margin-top: 20px;
-    color: #555;
+    font-size: 24px;
+    margin-top: 30px;
 }
 
-footer {
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: #aaa;
+#set-button {
+    background-color: #fc472b;
+    color: white;
+    border-style: none;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    border-radius: 4px;
 }
