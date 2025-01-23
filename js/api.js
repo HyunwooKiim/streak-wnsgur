@@ -1,14 +1,12 @@
 import CONFIG from "./config.js";
 
-const key = atob(CONFIG.API_KEY);
-
 export async function fetchStartDate() {
     try {
         const response = await fetch(CONFIG.API_URL, {
-            headers: { Authorization: `Bearer ${key}` },
+            headers: { Authorization: `Bearer ${CONFIG.API_KEY}` },
         });
         const data = await response.json();
-        const content = JSON.parse(atob(data.content));
+        const content = JSON.parse(atob(data.content)); // Base64 디코딩
         return { startDate: content.startDate, sha: data.sha };
     } catch (error) {
         console.error("Error fetching start date:", error);
@@ -24,12 +22,12 @@ export async function updateStartDate(newDate, message) {
         await fetch(CONFIG.API_URL, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${key}`,
+                Authorization: `Bearer ${CONFIG.API_KEY}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 message: message,
-                content: btoa(JSON.stringify(newContent, null, 2)),
+                content: btoa(JSON.stringify(newContent, null, 2)), // Base64 인코딩
                 sha: sha,
             }),
         });
