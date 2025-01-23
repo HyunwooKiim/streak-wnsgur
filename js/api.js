@@ -1,13 +1,29 @@
 import CONFIG from "./config.js";
 
+console.log("API Key:", CONFIG.API_KEY);
+
 export async function fetchStartDate() {
     try {
         const response = await fetch(CONFIG.API_URL, {
-            headers: { Authorization: `Bearer ${CONFIG.API_KEY}` },
+            headers: {
+                Authorization: `Bearer ${CONFIG.API_KEY}`, // API 키 주입
+            },
         });
+
+        // 요청이 실패하면 에러 처리
+        if (!response.ok) {
+            throw new Error(`GitHub API request failed with status ${response.status}`);
+        }
+
         const data = await response.json();
-        const content = JSON.parse(atob(data.content)); // Base64 디코딩
-        return { startDate: content.startDate, sha: data.sha };
+
+        // Base64로 인코딩된 JSON 디코딩
+        if (data.encoding === "base64") {
+            const decodedContent = atob(data.content); // Base64 디코딩
+            return JSON.parse(decodedContent); // JSON으로 변환
+        } else {
+            throw new Error("Unexpected encoding: " + data.encoding);
+        }
     } catch (error) {
         console.error("Error fetching start date:", error);
         return null;
