@@ -1,3 +1,4 @@
+console.log('자바스크립트 로드 완료');
 fetch('./env.js')
     .then((response) => response.text())
     .then((envData) => {
@@ -64,6 +65,34 @@ fetch('./env.js')
                 console.error("Error updating start date:", error);
             }
         }
+        async function updateStartDate() {
+            const today = new Date().toISOString().split('T')[0];
+            const { sha } = await fetchStartDate();
+
+            const newContent = {
+                startDate: today,
+            };
+
+            try {
+                await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `Bearer ${API_KEY}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: 'Update start date',
+                        content: btoa(JSON.stringify(newContent, null, 2)), // Base64 인코딩
+                        sha: sha,
+                    }),
+                });
+
+                calculateStreak(); // UI 업데이트
+            } catch (error) {
+                console.error("Error updating start date:", error);
+            }
+        }
+        
         async function calculateStreak() {
             const data = await fetchStartDate();
             if (!data) return;
