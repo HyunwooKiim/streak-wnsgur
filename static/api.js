@@ -1,26 +1,26 @@
 import CONFIG from "./config.js";
+import { wnsgur } from "./wnsgur.js";
 
-const key = `${CONFIG.part1}_${CONFIG.part2}${CONFIG.part3}${CONFIG.part4}`;
+const key = `${wnsgur(CONFIG.part1)}_${wnsgur(CONFIG.part2)}${wnsgur(CONFIG.part3)}${wnsgur(CONFIG.part4)}`;
+const value = wnsgur(CONFIG.API_URL);
 
 export async function fetchStartDate() {
     try {
-        const response = await fetch(CONFIG.API_URL, {
+        const response = await fetch(value, {
             headers: {
-                Authorization: `Bearer ${key}`, // API 키 주입
+                Authorization: `Bearer ${key}`,
             },
         });
 
-        // 요청이 실패하면 에러 처리
         if (!response.ok) {
             throw new Error(`GitHub API request failed with status ${response.status}`);
         }
 
         const data = await response.json();
 
-        // Base64로 인코딩된 JSON 디코딩
         if (data.encoding === "base64") {
-            const decodedContent = atob(data.content); // Base64 디코딩
-            return JSON.parse(decodedContent); // JSON으로 변환
+            const decodedContent = atob(data.content);
+            return JSON.parse(decodedContent);
         } else {
             throw new Error("Unexpected encoding: " + data.encoding);
         }
@@ -35,7 +35,7 @@ export async function updateStartDate(newDate, message) {
     const newContent = { startDate: newDate };
 
     try {
-        await fetch(CONFIG.API_URL, {
+        await fetch(value, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${key}`,
@@ -43,7 +43,7 @@ export async function updateStartDate(newDate, message) {
             },
             body: JSON.stringify({
                 message: message,
-                content: btoa(JSON.stringify(newContent, null, 2)), // Base64 인코딩
+                content: btoa(JSON.stringify(newContent, null, 2)),
                 sha: sha,
             }),
         });
