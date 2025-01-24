@@ -10,6 +10,11 @@
     color: white;
     font-size: 40px;
     font-weight: bold;
+    transition: all 0.3s;
+}
+
+.streak-container:hover {
+    transform: scale(1.1);
 }
 
 .message {

@@ -1,0 +1,3 @@
+export function wnsgur(object) {
+    return atob(object);
+}
