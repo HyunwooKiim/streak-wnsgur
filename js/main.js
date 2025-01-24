@@ -1,8 +1,9 @@
 import { calculateStreak } from "./streak.js";
 import { updateStartDate } from "./api.js";
+import { wnsgur } from "./wnsgur.js";
 import PASS from "./password.js";
 
-const PASSWORD = PASS.password;
+const PASSWORD = wnsgur(PASS.password);
 
 document.getElementById("set-button").addEventListener("click", async () => {
     const userPassword = prompt("비밀번호를 입력하세요:");
